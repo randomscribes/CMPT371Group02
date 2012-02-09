@@ -1,0 +1,17 @@
+# To get your own working directory of this repo use
+git clone git@github.com:smh875smh/CMPT371Group02.git
+
+# To add files
+git add [FileName(s)]
+
+# To commit files to local repository
+git commit -m "Message"
+
+#To commit (push) files to main repository (the one everyone accesses)
+#By default remote name is origin
+git push [remotename] [branch]
+
+#Once you have your own working copy of the repo, to open in netbeans
+#Just "Open Project" > browse to the Team Effort\SoccerSystem\group07\cmpt370group07 directory and click Open Project.
+#Once the project is loaded you will be able to right click and select "Git" from the menu, a sub menu will appear
+#with your options.
