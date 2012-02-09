@@ -11,7 +11,7 @@ git commit -m "Message"
 #By default remote name is origin
 git push [remotename] [branch]
 
-#Once you have your own working copy of the repo, to open in netbeans
+#Once you have your own working copy of the repo, to open in netbeans (7.1)
 #Just "Open Project" > browse to the Team Effort\SoccerSystem\group07\cmpt370group07 directory and click Open Project.
 #Once the project is loaded you will be able to right click and select "Git" from the menu, a sub menu will appear
 #with your options.
