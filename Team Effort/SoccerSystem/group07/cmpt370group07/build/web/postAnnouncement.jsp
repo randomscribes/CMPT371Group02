@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin - Post Announcement</title>
         <link rel="stylesheet" href="css/template.css">
-        <script type="text/javascript" src="ajaxAdminProfile.js"></script> 
+        <script type="text/javascript" src="js/ajaxAdminProfile.js"></script> 
     </head>
 
     <body onload="getAnnouncements()">

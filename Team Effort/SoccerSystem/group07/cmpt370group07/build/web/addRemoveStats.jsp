@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="css/addRemoveStats.css">
         <link rel="stylesheet" href="css/tableTemplate.css">
-        <SCRIPT LANGUAGE="JavaScript" SRC="ajaxAddRemoveStats.js"></SCRIPT>
+        <SCRIPT LANGUAGE="JavaScript" SRC="js/ajaxAddRemoveStats.js"></SCRIPT>
 
     </head>
 
