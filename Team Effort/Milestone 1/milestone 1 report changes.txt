@@ -1,0 +1,19 @@
+For JUST IN CASE Simon and co. can't open .odt files, here are the changes I made to the document, you can just copy/paste them into your document.
+(Open Office won't let me save in .docx format)
+
+6 Project Plan
+6.1 Plan for Milestone Objectives
+(see the Objectives page on the wiki)
+Milestone 1 was basically the “planning and preparation” milestone; we got our svn and database stuff figured out, and set out our goals for each milestone, so that we have goals to work towards.
+Milestone 2 is the “getting started” milestone, where we create smoke tests to run against the system for each update to ensure that we don't break the system by adding to it, as well as updating the structure of the database (to make it easier for us to use for future milestones). We'll also be adding the top navigation bar during this milestone.
+Milestone 3 is the date-format fixing milestone, where we will be changing all instances of a Date to a standardized format (Javascript) for internal consistency. We'll also be changing the games listing so that it lists games and stats by season, rather than by year.
+Milestone 4 is the auto-complete milestone; we'll be focusing on making it so that some textboxes will auto-complete when filling out forms, as well as making it so that you can auto-generate all games for a season rather than filling each game in individually.
+Milestone 5 is the wrap-up milestone: we'll create a simple announcements system (to e-mail notifications to players and managers about upcoming games and events, changes to the system, etc.), and update the password authentication algorithm (mostly to make it case-sensitive).
+6.2 Design and Architecture
+6.3 Critical Path Method Schedule
+Milestone 1 was about making sure we'd be able to work on our project as easily as we expect to be able to (for instance, being able to actually access the database, which was taken down by IT but we got it back), as well as planning out the other milestones, so that all needed to be done first.
+Milestone 2 will include production of smoke tests, which need to be designed sooner rather than later (projects are harder to fix if you don't realize they're broken until they're really big). We'll also be updating the database structure, and that needs to be high-priority as well (so that we don't have to deal with a changing database structure halfway through the project, and also so that there are less new things to break).
+Milestone 3 involves changing the date format for the whole project, which definitely needs to be done before the auto-completion stuff for milestone 4 is started. The database changes in milestone 2 will need to be designed with the new date structure in mind.
+The password authentication for Milestone 5 isn't really related to the changes we'll be making during the other milestones, but the announcement system should be the last thing we do, since it involves reporting on other parts of the system (which will be changing during milestones 2 and 3).
+6.4 Estimate of Software Size and Effort
+Since our effort is going to be more on using tools to improve our project and code than actually adding things to the project, all of our proposed additions are reasonably small. Using pair programming, 2 weeks should be an easily achievable goal for each of the individual goals.
