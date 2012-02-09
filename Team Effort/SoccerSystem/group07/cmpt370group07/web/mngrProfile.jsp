@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="css/playerManagerProfile.css">
         <link rel="stylesheet" href="css/tableTemplate.css">
-        <script type="text/javascript" src="softedge.js"></script>
-        <script type="text/javascript" src="ajaxPlayerManagerProfile.js"></script>
+        <script type="text/javascript" src="js/softedge.js"></script>
+        <script type="text/javascript" src="js/ajaxPlayerManagerProfile.js"></script>
     </head>
     <body onLoad="getUpcomingGames(), getAnnouncements(), getMyStats()">
         <div class="header row">

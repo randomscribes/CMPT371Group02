@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="css/adminTemplate.css">
         <link rel="stylesheet" href="css/tableTemplate.css">
-        <SCRIPT LANGUAGE="JavaScript" SRC="ajaxAddRemoveStats.js"></SCRIPT>
+        <SCRIPT LANGUAGE="JavaScript" SRC="js/ajaxAddRemoveStats.js"></SCRIPT>
 
     </head>
 

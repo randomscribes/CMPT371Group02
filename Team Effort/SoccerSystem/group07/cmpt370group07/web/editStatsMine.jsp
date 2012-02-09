@@ -15,7 +15,7 @@
         <title>Admin - Edit Stats</title>
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="css/adminTemplate.css">
-        <SCRIPT LANGUAGE="JavaScript" SRC="ajaxEditStats.js"></SCRIPT>
+        <SCRIPT LANGUAGE="JavaScript" SRC="js/ajaxEditStats.js"></SCRIPT>
 
     </head>
 

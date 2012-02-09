@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="css/template.css">
         <link rel="stylesheet" href="css/adminTemplate.css">
         <link rel="stylesheet" href="css/tableTemplate.css">
-        <SCRIPT LANGUAGE="JavaScript" SRC="ajaxEditSchedule.js"></SCRIPT>
+        <SCRIPT LANGUAGE="JavaScript" SRC="js/ajaxEditSchedule.js"></SCRIPT>
 
     </head>
 
