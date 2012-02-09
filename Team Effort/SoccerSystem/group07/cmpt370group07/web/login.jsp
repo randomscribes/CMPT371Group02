@@ -16,8 +16,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
         <title>Login Page</title>
-        <link rel="stylesheet" href="template.css">        
-        <link rel="stylesheet" href="login.css">
+        <link rel="stylesheet" href="css/template.css">        
+        <link rel="stylesheet" href="css/login.css">
     </head>
 
     <body>

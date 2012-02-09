@@ -13,9 +13,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
         <title>Admin - Add Remove Stats</title>
-        <link rel="stylesheet" href="template.css">
-        <link rel="stylesheet" href="addRemoveStats.css">
-        <link rel="stylesheet" href="tableTemplate.css">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="css/addRemoveStats.css">
+        <link rel="stylesheet" href="css/tableTemplate.css">
         <SCRIPT LANGUAGE="JavaScript" SRC="ajaxAddRemoveStats.js"></SCRIPT>
 
     </head>

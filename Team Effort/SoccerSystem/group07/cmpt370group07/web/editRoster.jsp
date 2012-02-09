@@ -13,9 +13,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
         <title>Admin - Edit Rosters</title>
-        <link rel="stylesheet" href="template.css">
-        <link rel="stylesheet" href="adminTemplate.css">
-        <link rel="stylesheet" href="tableTemplate.css">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="css/adminTemplate.css">
+        <link rel="stylesheet" href="css/tableTemplate.css">
         <SCRIPT LANGUAGE="JavaScript" SRC="ajaxEditRoster.js"></SCRIPT>
     </head>
 

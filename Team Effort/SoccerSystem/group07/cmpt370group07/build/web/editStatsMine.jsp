@@ -13,8 +13,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
         <title>Admin - Edit Stats</title>
-        <link rel="stylesheet" href="template.css">
-        <link rel="stylesheet" href="adminTemplate.css">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="css/adminTemplate.css">
         <SCRIPT LANGUAGE="JavaScript" SRC="ajaxEditStats.js"></SCRIPT>
 
     </head>

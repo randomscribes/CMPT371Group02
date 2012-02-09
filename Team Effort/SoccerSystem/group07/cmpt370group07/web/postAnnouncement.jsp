@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin - Post Announcement</title>
-        <link rel="stylesheet" href="template.css">
+        <link rel="stylesheet" href="css/template.css">
         <script type="text/javascript" src="ajaxAdminProfile.js"></script> 
     </head>
 

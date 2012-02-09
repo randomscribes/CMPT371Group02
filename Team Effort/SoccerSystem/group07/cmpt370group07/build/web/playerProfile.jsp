@@ -10,9 +10,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Player Profile</title>
-        <link rel="stylesheet" href="template.css">
-        <link rel="stylesheet" href="playerManagerProfile.css">
-        <link rel="stylesheet" href="tableTemplate.css">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="css/playerManagerProfile.css">
+        <link rel="stylesheet" href="css/tableTemplate.css">
         <script type="text/javascript" src="softedge.js"></script>
         <script type="text/javascript" src="ajaxPlayerManagerProfile.js"></script>        
     </head>
@@ -28,7 +28,7 @@
         <div class="body row scroll-y">
 
             <div id="sidebar">
-                <img src="profile.jpg" class="profilePicture"/>
+                <img src="images/profile.jpg" class="profilePicture"/>
                 <fieldset style="border-top:0px;width:250px;">
                     <p id="userInfo"><b>Name:</b> <%= currentUser.getFirstName() + " " + currentUser.getLastName()%></p>
                     <p id="userInfo"><b>Address:</b> <%= currentUser.getAddress()%></p>

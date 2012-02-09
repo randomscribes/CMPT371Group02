@@ -16,8 +16,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
         <title>Administrator Home</title>
-        <link rel="stylesheet" href="template.css">
-        <link rel="stylesheet" href="adminHome.css">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="css/adminHome.css">
     </head>
 
     <body>
