@@ -1,0 +1,159 @@
+/* 
+    Document   : addRemoveStats
+    Created on : Nov 13, 2011, 8:02:31 PM
+    Author     : Simon
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+form{
+    margin:0;
+    padding:0;
+}
+fieldset{
+    margin:1em 0;
+    border:none;
+    border-top:1px solid #000;
+    margin-bottom: 30px;
+}
+legend{
+    margin:0em 0;
+    padding:0 0em;
+    color:#036;
+    background:transparent;
+    font-size:1.6em;
+    font-weight:bold;
+    padding-bottom: 5px;
+}
+label{float:left;
+      width:100px;
+      padding:0 1em;
+      text-align:right;
+}
+fieldset div{
+    margin-bottom:.5em;
+    padding:0;
+    display:block;
+}
+fieldset div input,fieldset div textarea{
+    width:150px;
+    border-top:1px solid #555;
+    border-left:1px solid #555;
+    border-bottom:1px solid #ccc;
+    border-right:1px solid #ccc;
+    padding:1px;color:#333;
+}
+fieldset div select{
+    padding:1px;
+}
+div.fm-multi div{
+    margin:5px 0;
+}
+div.fm-multi input{
+    width:1em;
+}
+div.fm-multi label{
+    display:block;
+    width:200px;
+    padding-left:5em;
+    text-align:left;
+}
+#fm-submit{
+    clear:both;
+    padding-top:1em;
+    text-align:center;
+}
+#fm-submit input{
+    width: 122px;
+    border:1px solid #333;
+    padding:2px 1em;
+    background:#555;
+    color:#fff;
+    font-size:100%;
+    float: left;
+    margin-right: 5px;
+}
+#fm-submit #status{
+    width: 150px;
+    border:1px solid #333;
+    padding:2px 1em;
+    background:#555;
+    color:#fff;
+    font-size:100%;
+    float: left;
+    margin-right: 5px;
+}
+#fm-submit button{
+    width: 110px;
+}
+
+input:focus,textarea:focus{
+    background:#efefef;
+    color:#000;
+}
+fieldset div.fm-req{
+    font-weight:bold;
+}
+fieldset div.fm-req label:before{
+    content:"* ";
+}
+
+#fm-opt select{
+    width: 250px;
+    background-color: rgba(200,200,200,0.8);
+}
+
+#fm-opt label{
+    width:150px;
+    padding-left:0em;
+    padding-bottom: 2px;
+    text-align:left;
+}
+
+#home_feedback{
+    height: 20px;
+    padding-top: 30px;
+    width: 200px;
+}
+
+#away_feedback{
+    height: 20px;
+    padding-top: 30px;
+    width: 200px;
+}
+
+#container{
+    margin:0;
+    padding:1em;
+    width:350px;
+    text-align:left;
+    float:left;
+}
+
+#displayUserFeedback{
+    float:right;
+    padding:1em;
+}
+
+#addGoalFeedback{
+    width: 470px;
+    padding-top: 16px;
+}
+
+#displayScoreFeedback{
+    height: 30px;
+}
+
+#gameStatus{
+    width: 200px;
+    height: 10px;
+}
+
+#gameStatus label{
+    height:200px;
+    background-color: green;
+}
