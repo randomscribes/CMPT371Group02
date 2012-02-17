@@ -41,11 +41,13 @@ public class editResultServ extends HttpServlet {
 
         // Grab parameters that were filled out in the form
         String sgame_id = request.getParameter("game_id");
+        String season = request.getParameter("season");
         int game_id = Integer.parseInt(sgame_id);
         int home_team = usr.getHomeTeam(game_id);
         int away_team = usr.getAwayTeam(game_id);
 
-        response.sendRedirect("addRemoveStats.jsp?game_id=" + sgame_id + "&home_team=" + home_team + "&away_team=" + away_team);
+        response.sendRedirect("addRemoveStats.jsp?game_id=" + sgame_id + "&home_team=" + home_team + "&away_team=" + away_team + "&season=" +season);
+
 
     }
 

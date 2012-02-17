@@ -25,12 +25,23 @@
 
         <div class="body row scroll-y">
             <div id="fm-submit" style="padding-top:0em; height:30px; border-bottom: 6px double #000">
-                <form action="homeButtonServlet" method="post">
-                    <button type="submit" style="float:left;width:100px;">Home</button>
-                </form>
-                <form action="LogoutServlet" method="post">
-                    <button type="submit" style="float:right;width:100px;">Logout</button>
-                </form>
+                <ul id="menu">
+                    <li><img src="images/Menu-icon.png" >
+                        <ul id="fullMenu">
+                            <li><form action="homeButtonServlet" method="post"><button type="submit">Home</button></form></li>
+                            <form id="adminform" action="adminController">
+                                <input type="hidden" id="menuSeason" name="Season" value="<% out.println(request.getParameter("season")); %>">
+                                <li><button name="buttonPressed" value="Add/Remove Team" type="submit">Add/Remove Team</button></li>
+                                <li><button name="buttonPressed" value="Add/Remove User" type="submit">Add/Remove User</button></li>
+                                <li><button name="buttonPressed" value="Edit Rosters" type="submit">Edit Rosters</button></li>
+                                <li><button name="buttonPressed" value="Edit Schedule" type="submit">Edit Schedule</button></li>
+                                <li><button type="submit" value="Update Stats" name="buttonPressed">Update Stats</button></li>
+                                <li><button type="submit" value="Post Announcement" name="buttonPressed">Post Announcement</button></li>
+                            </form>
+                            <li><form action="LogoutServlet" method="post"><button type="submit">Logout</button></form></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
 
             <div id="container">

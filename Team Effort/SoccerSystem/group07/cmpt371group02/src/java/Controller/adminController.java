@@ -47,7 +47,7 @@ public class adminController extends HttpServlet {
         if (button.equals("Add/Remove Team")) {
             response.sendRedirect("addRemoveTeam.jsp?season=" + season);
         } else if (button.equals("Add/Remove User")) {
-            response.sendRedirect("addRemoveUser.jsp");
+            response.sendRedirect("addRemoveUser.jsp?season=" + season);
         } else if (button.equals("Edit Rosters")) {
             response.sendRedirect("editRoster.jsp?season=" + season);
         } else if (button.equals("Edit Schedule")) {
@@ -55,7 +55,7 @@ public class adminController extends HttpServlet {
         } else if (button.equals("Update Stats")) {
             response.sendRedirect("editStats.jsp?season=" + season);
         } else if (button.equals("Post Announcement")) {
-            response.sendRedirect("postAnnouncement.jsp");
+            response.sendRedirect("postAnnouncement.jsp?season=" + season);
         } else {
             System.out.println("bad admin home redirect");
         }
