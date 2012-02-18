@@ -2,13 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package editSchedule;
+package editScheduleAndStats;
 
+import editStats.editStats;
 import java.sql.ResultSet;
 import Connection.ConnectionManager;
 import dbFunctions.dbFunctions;
 import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.Connection;
+import editSchedule.editSchedule;
 import java.sql.SQLException;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -24,7 +26,7 @@ import static org.junit.Assert.*;
  *
  * @author adammravnik
  */
-public class editScheduleTest {
+public class editScheduleAndStatsTest {
     
     private final editSchedule instance;
     private Connection db;
@@ -32,13 +34,13 @@ public class editScheduleTest {
     private dbFunctions dbf;
 
     
-    public editScheduleTest() {
+    public editScheduleAndStatsTest() {
         instance = new editSchedule();
         db = (Connection) ConnectionManager.getConnection();
         try {
             st = (Statement) db.createStatement();
         } catch (SQLException ex) {
-            Logger.getLogger(editScheduleTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(editScheduleAndStatsTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         dbf = new dbFunctions();
     }
@@ -63,7 +65,7 @@ public class editScheduleTest {
      * Test of addGame method, of class editSchedule.
      */
     @Test
-    public void testAddRemoveGame() throws Exception {
+    public void testAddRemoveGameAndStats() throws Exception {
         System.out.println("addGame test");
         Integer home_team_id = 100;
         Integer away_team_id = 101;
@@ -86,6 +88,20 @@ public class editScheduleTest {
             num = (resultSet.getString("game_id"));
         }
         game_id = Integer.valueOf(num);
+        
+        System.out.println("getHomeTeam test");
+        editStats editStatsInstance = new editStats();
+        int expResultStats = 100;
+        int expStatsReturn = editStatsInstance.getHomeTeam(game_id);
+        assertEquals(expResultStats, expStatsReturn);
+        System.out.println("getHomeTeam passed");
+        
+        System.out.println("getAwayTeam test");
+        editStatsInstance = new editStats();
+        expResultStats = 101;
+        expStatsReturn = editStatsInstance.getAwayTeam(game_id);
+        assertEquals(expResultStats, expStatsReturn);
+        System.out.println("getAwayTeam passed");
         
         result = instance.removeGame(game_id);
         assertEquals(expResult, result);
