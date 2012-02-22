@@ -1,7 +1,7 @@
 <%-- 
     Document   : addRemoveStats
     Created on : Nov 3, 2011, 6:19:30 PM
-    Author     : Simon
+    Author     : Simon Fanner
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*" import="Connection.ConnectionManager" import="java.lang.*"%>
