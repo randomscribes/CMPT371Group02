@@ -1,7 +1,7 @@
 <%-- 
     Document   : addRemoveTeam
     Created on : 2011-10-19, 23:00:49
-    Author     : Steph
+    Author     : Steph W
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*" import="Connection.ConnectionManager" import="java.lang.*"%>
