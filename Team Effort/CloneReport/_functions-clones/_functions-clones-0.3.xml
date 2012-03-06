@@ -1,0 +1,216 @@
+<clones>
+<systeminfo processor="nicad3" system="_" granularity="unctions" threshold="30%" minlines="10" maxlines="1000"/>
+<cloneinfo npcs="214" npairs="42"/>
+<runinfo ncompares="769" cputime="100000"/>
+
+<clone nlines="44" similarity="72">
+<source file="./cmpt371group02/src/java/addRemoveStats/removeGoalServ.java" startline="33" endline="83" pcid="134"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addGoalServ.java" startline="38" endline="90" pcid="125"></source>
+</clone>
+
+<clone nlines="34" similarity="97">
+<source file="./cmpt371group02/src/java/editRoster/displayTeamRosterServ.java" startline="80" endline="115" pcid="23"></source>
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="71" endline="106" pcid="14"></source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayTeamRosterServ.java" startline="80" endline="115" pcid="23"></source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148"></source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayTeamRosterServ.java" startline="80" endline="115" pcid="23"></source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204"></source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="71" endline="106" pcid="14"></source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148"></source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="71" endline="106" pcid="14"></source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204"></source>
+</clone>
+
+<clone nlines="31" similarity="74">
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="70" endline="110" pcid="90"></source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148"></source>
+</clone>
+
+<clone nlines="31" similarity="74">
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="70" endline="110" pcid="90"></source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204"></source>
+</clone>
+
+<clone nlines="31" similarity="80">
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="70" endline="110" pcid="90"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="63" endline="100" pcid="39"></source>
+</clone>
+
+<clone nlines="30" similarity="90">
+<source file="./cmpt371group02/src/java/playerManagerProfile/getAnnouncementsServ.java" startline="31" endline="68" pcid="34"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getAdminAnnouncementsServ.java" startline="30" endline="66" pcid="63"></source>
+</clone>
+
+<clone nlines="29" similarity="96">
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148"></source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204"></source>
+</clone>
+
+<clone nlines="29" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="63" endline="100" pcid="39"></source>
+</clone>
+
+<clone nlines="29" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="63" endline="100" pcid="39"></source>
+</clone>
+
+<clone nlines="24" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveStats/displayFinalScoreServ.java" startline="37" endline="67" pcid="120"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/displayGameStatusServ.java" startline="35" endline="62" pcid="138"></source>
+</clone>
+
+<clone nlines="24" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveStats/displayFinalScoreServ.java" startline="37" endline="67" pcid="120"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/submitFinalResultServ.java" startline="31" endline="57" pcid="98"></source>
+</clone>
+
+<clone nlines="23" similarity="73">
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="36" endline="62" pcid="203"></source>
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="37" endline="62" pcid="13"></source>
+</clone>
+
+<clone nlines="23" similarity="78">
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="28" endline="60" pcid="38"></source>
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="33" endline="61" pcid="89"></source>
+</clone>
+
+<clone nlines="21" similarity="90">
+<source file="./cmpt371group02/src/java/addRemoveStats/displayGameStatusServ.java" startline="35" endline="62" pcid="138"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/submitFinalResultServ.java" startline="31" endline="57" pcid="98"></source>
+</clone>
+
+<clone nlines="15" similarity="80">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="196" endline="210" pcid="112"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="171" endline="185" pcid="111"></source>
+</clone>
+
+<clone nlines="12" similarity="75">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="127" endline="138" pcid="109"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="149" endline="159" pcid="110"></source>
+</clone>
+
+<clone nlines="11" similarity="72">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="49" endline="61" pcid="46"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="35" endline="45" pcid="45"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198"></source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43"></source>
+</clone>
+
+<clone nlines="11" similarity="72">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198"></source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198"></source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198"></source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75"></source>
+</clone>
+
+<clone nlines="11" similarity="90">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152"></source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152"></source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152"></source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152"></source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102"></source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102"></source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102"></source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27"></source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102"></source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75"></source>
+</clone>
+
+<clone nlines="10" similarity="80">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43"></source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212"></source>
+</clone>
+
+<clone nlines="10" similarity="90">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43"></source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27"></source>
+</clone>
+
+<clone nlines="10" similarity="90">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43"></source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75"></source>
+</clone>
+
+<clone nlines="10" similarity="80">
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212"></source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27"></source>
+</clone>
+
+<clone nlines="10" similarity="80">
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212"></source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75"></source>
+</clone>
+
+<clone nlines="10" similarity="90">
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27"></source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75"></source>
+</clone>
+
+</clones>

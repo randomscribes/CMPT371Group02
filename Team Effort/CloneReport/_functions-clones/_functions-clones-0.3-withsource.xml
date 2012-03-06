@@ -1,0 +1,2091 @@
+<clones>
+<systeminfo processor="nicad3" system="_" granularity="unctions" threshold="30%" minlines="10" maxlines="1000"/>
+<cloneinfo npcs="214" npairs="42"/>
+<runinfo ncompares="769" cputime="100000"/>
+
+<clone nlines="44" similarity="72">
+<source file="./cmpt371group02/src/java/addRemoveStats/removeGoalServ.java" startline="33" endline="83" pcid="134">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        // Grab parameters that were filled out in the form
+        String sgame_id = request.getParameter("game_id");
+        String sscore_id = request.getParameter("scorePlayer");
+        String sassist_id = request.getParameter("assistPlayer");
+        String game_type = request.getParameter("game_type");
+
+        if (sgame_id.equals("")) {
+            out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else if (sscore_id.equals("")) {
+            out.println("<div style=\"color:red;\">Please select a player</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+            Integer score_id = Integer.parseInt(sscore_id);
+            if (!sassist_id.equals("")) {
+                Integer assist_id = Integer.parseInt(sassist_id);
+
+                try {
+                    if (usr.removeGoal(game_id, score_id, assist_id, game_type)) {
+                        out.println("<p style=\"color:green;\"> Game " + game_id + "</p><div style=\"color:green;\"> Result removed successfully</div>");
+                    } else {
+                        out.println("<div style=\"color:red;\">Stat not found</div>");
+                    }
+                } catch (SQLException e) {
+                    out.println("<p style=\"color:red;\"> Result" + "</p><div style=\"color:red;\">not removed succesfully. SQL Exception: " + e + " </div>");
+                    //displayACK("Add User", sfirst_name + slast_name + " Failed!!");
+                } finally {
+                    out.close();
+                }
+            } else {
+                try {
+                    if (usr.removeGoal(game_id, score_id, game_type)) {
+                        out.println("<p style=\"color:green;\"> Game " + game_id + "</p><div style=\"color:green;\"> Result removed successfully</div>");
+                    } else {
+                        out.println("<div style=\"color:red;\">Stat not found</div>");
+                    }
+                } catch (SQLException e) {
+                    out.println("<label style=\"color:red;\"> Result" + "</label><div style=\"color:red;\">not removed succesfully. SQL Exception: " + e + " </div>");
+                    //displayACK("Add User", sfirst_name + slast_name + " Failed!!");
+                } finally {
+                    out.close();
+                }
+            }
+        }
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addGoalServ.java" startline="38" endline="90" pcid="125">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        // Grab parameters that were filled out in the form
+        String sgame_id = request.getParameter("game_id");
+        String sscore_id = request.getParameter("scorePlayer");
+        String sassist_id = request.getParameter("assistPlayer");
+        String game_type = request.getParameter("game_type");
+
+        System.out.println(sscore_id + ", " + sassist_id + ", " + sgame_id + ", " + game_type);
+
+
+        if (sgame_id.equals("")) {
+            out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else if (sscore_id.equals("")) {
+            out.println("<div style=\"color:red;\">Please select a player</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+            Integer score_id = Integer.parseInt(sscore_id);
+            if (!sassist_id.equals("")) { //if the goal is assisted
+                Integer assist_id = Integer.parseInt(sassist_id);
+
+                try {
+                    if (usr.addGoal(game_id, score_id, assist_id, game_type)) {
+                        out.println("<p style=\"color:green;\"> Game " + game_id + "</p><div style=\"color:green;\"> Result added successfully</div>");
+                    } else;
+                    //out.println("<label style=\"color:red;\"> Team" + steam_name + "</label><div style=\"color:red;\">Not added to roster</div>");
+                } catch (SQLException e) {
+                    out.println("<label style=\"color:red;\"> Result" + "</label><div style=\"color:red;\">not added succesfully. SQL Exception: " + e + " </div>");
+                    //displayACK("Add User", sfirst_name + slast_name + " Failed!!");
+                } finally {
+                    out.close();
+                }
+            } else //if the goal is unnassisted
+            {
+                try {
+                    if (usr.addGoal(game_id, score_id, game_type)) {
+                        out.println("<p style=\"color:green;\"> Game " + game_id + "</p><div style=\"color:green;\"> Result added successfully</div>");
+                    } else;
+                    //out.println("<label style=\"color:red;\"> Team" + steam_name + "</label><div style=\"color:red;\">Not added to roster</div>");
+                } catch (SQLException e) {
+                    out.println("<label style=\"color:red;\"> Result" + "</label><div style=\"color:red;\">not added succesfully. SQL Exception: " + e + " </div>");
+                    //displayACK("Add User", sfirst_name + slast_name + " Failed!!");
+                } finally {
+                    out.close();
+                }
+            }
+        }
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="34" similarity="97">
+<source file="./cmpt371group02/src/java/editRoster/displayTeamRosterServ.java" startline="80" endline="115" pcid="23">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        usrTeam = new playerManagerProfile();
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Current Roster:</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                if (j != 3) {
+                    out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+                } else {
+                    out.println("<td valign=Top>" + usrTeam.getTeamName(row.elementAt(3).toString()) + "<br></td>");
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="71" endline="106" pcid="14">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        usrTeam = new playerManagerProfile();
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">All Players</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                if (j != 3) {
+                    out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+                } else {
+                    out.println("<td valign=Top>" + usrTeam.getTeamName(row.elementAt(3).toString()) + "<br></td>");
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayTeamRosterServ.java" startline="80" endline="115" pcid="23">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        usrTeam = new playerManagerProfile();
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Current Roster:</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                if (j != 3) {
+                    out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+                } else {
+                    out.println("<td valign=Top>" + usrTeam.getTeamName(row.elementAt(3).toString()) + "<br></td>");
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayTeamRosterServ.java" startline="80" endline="115" pcid="23">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        usrTeam = new playerManagerProfile();
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Current Roster:</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                if (j != 3) {
+                    out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+                } else {
+                    out.println("<td valign=Top>" + usrTeam.getTeamName(row.elementAt(3).toString()) + "<br></td>");
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Users</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="71" endline="106" pcid="14">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        usrTeam = new playerManagerProfile();
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">All Players</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                if (j != 3) {
+                    out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+                } else {
+                    out.println("<td valign=Top>" + usrTeam.getTeamName(row.elementAt(3).toString()) + "<br></td>");
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="34" similarity="79">
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="71" endline="106" pcid="14">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        usrTeam = new playerManagerProfile();
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">All Players</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                if (j != 3) {
+                    out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+                } else {
+                    out.println("<td valign=Top>" + usrTeam.getTeamName(row.elementAt(3).toString()) + "<br></td>");
+                }
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Users</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="31" similarity="74">
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="70" endline="110" pcid="90">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        response.setContentType("text/html");
+
+        gamesUsr = new playerManagerProfile();
+
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Schedule</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            //   for (int j = 0; j < row.size(); j++) {
+
+            out.println("<td valign=Top>" + row.elementAt(0).toString() + "<br></td>");
+            out.println("<td valign=Top>" + gamesUsr.getTeamName(row.elementAt(1).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + gamesUsr.getTeamName(row.elementAt(2).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(3).toString() + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(4).toString() + "<br></td>");
+
+
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="31" similarity="74">
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="70" endline="110" pcid="90">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        response.setContentType("text/html");
+
+        gamesUsr = new playerManagerProfile();
+
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Schedule</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            //   for (int j = 0; j < row.size(); j++) {
+
+            out.println("<td valign=Top>" + row.elementAt(0).toString() + "<br></td>");
+            out.println("<td valign=Top>" + gamesUsr.getTeamName(row.elementAt(1).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + gamesUsr.getTeamName(row.elementAt(2).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(3).toString() + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(4).toString() + "<br></td>");
+
+
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Users</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="31" similarity="80">
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="70" endline="110" pcid="90">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        response.setContentType("text/html");
+
+        gamesUsr = new playerManagerProfile();
+
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Schedule</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            //   for (int j = 0; j < row.size(); j++) {
+
+            out.println("<td valign=Top>" + row.elementAt(0).toString() + "<br></td>");
+            out.println("<td valign=Top>" + gamesUsr.getTeamName(row.elementAt(1).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + gamesUsr.getTeamName(row.elementAt(2).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(3).toString() + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(4).toString() + "<br></td>");
+
+
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="63" endline="100" pcid="39">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        //out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            //   for (int j = 0; j < row.size(); j++) {
+
+
+            out.println("<td valign=Top>" + usr.getTeamName(row.elementAt(0).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + usr.getTeamName(row.elementAt(1).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(2).toString() + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(3).toString() + "<br></td>");
+
+
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="30" similarity="90">
+<source file="./cmpt371group02/src/java/playerManagerProfile/getAnnouncementsServ.java" startline="31" endline="68" pcid="34">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("HELLOTHERE");
+
+        response.setContentType("text/html;charset=UTF-8");
+        out = response.getWriter();
+        usr = new playerManagerProfile();
+        Integer team_id = Integer.parseInt(request.getParameter("team_id"));
+        System.out.println("TeamID: " + team_id);
+
+        try {
+            Vector rs = usr.getAnnouncements(team_id);
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Sports Management System</title>");
+            out.println("</head>");
+            out.println("<body>");
+
+            //Element 0 is the user_id of the poster
+            //Element 1 is the message itself
+            for (int i = rs.size() - 1; i >= 0; i--) {
+                Vector row = (Vector) rs.elementAt(i);
+                out.println("<b>" + usr.getPoster(row.elementAt(0).toString()) + ":</b><br/>");
+                out.println(row.elementAt(1).toString() + "<br/><br/>");
+            }
+            out.println("</body>");
+            out.println("</html>");
+        } catch (SQLException e) {
+            out.println("No Announcements found 1");
+            //displayACK("ERROR", "No users found!");
+        } catch (Exception e) {
+            out.println("No Announcements found 2");
+            //displayACK("ERROR", "No users found!");
+        } finally {
+            out.close();
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getAdminAnnouncementsServ.java" startline="30" endline="66" pcid="63">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        System.out.println("HELLOTHERE");
+
+        response.setContentType("text/html;charset=UTF-8");
+        out = response.getWriter();
+        usr = new playerManagerProfile();
+
+        try {
+            Vector rs = usr.getAnnouncements();
+            System.out.println("SECOND");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Sports Management System</title>");
+            out.println("</head>");
+            out.println("<body>");
+
+            //Element 0 is the user_id of the poster
+            //Element 1 is the message itself
+            for (int i = rs.size() - 1; i >= 0; i--) {
+                Vector row = (Vector) rs.elementAt(i);
+                out.println("<b>" + usr.getPoster(row.elementAt(0).toString()) + ":</b><br/>");
+                out.println(row.elementAt(1).toString() + "<br/><br/>");
+            }
+            out.println("</body>");
+            out.println("</html>");
+        } catch (SQLException e) {
+            out.println("No Announcements found 1");
+            //displayACK("ERROR", "No users found!");
+        } catch (Exception e) {
+            out.println("No Announcements found 2");
+            //displayACK("ERROR", "No users found!");
+        } finally {
+            out.close();
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="29" similarity="96">
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Users</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="29" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveTeam/displayTeamsServ.java" startline="73" endline="104" pcid="148">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="63" endline="100" pcid="39">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        //out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            //   for (int j = 0; j < row.size(); j++) {
+
+
+            out.println("<td valign=Top>" + usr.getTeamName(row.elementAt(0).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + usr.getTeamName(row.elementAt(1).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(2).toString() + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(3).toString() + "<br></td>");
+
+
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="29" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="73" endline="103" pcid="204">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        out.println("<h1 id=\"table_id\">Users</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            for (int j = 0; j < row.size(); j++) {
+                out.println("<td valign=Top>" + row.elementAt(j).toString() + "<br></td>");
+            }
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="63" endline="100" pcid="39">
+    private void display(Vector rows, Vector hdr, String title, HttpServletResponse response) throws SQLException, Exception {
+        response.setContentType("text/html");
+
+        out.println("<HTML><HEAD><TITLE>");
+        out.println("Sports Management System");
+        out.println("</TITLE></HEAD><BODY>");
+
+        out.println("<tbody>");
+        //out.println("<h1 id=\"table_id\">Teams</h1>");
+        out.println("<table id=\"hor-minimalist-a\" >");
+
+
+        // print table's header
+        out.println("<tr valign=Top>");
+        for (int i = 0; i < hdr.size(); i++) {
+            out.println("<td valign=Top><b>" + hdr.elementAt(i).toString() + "</b><br></td>");
+        }
+        out.println("</tr>");
+        // print the body of the table
+        for (int i = 0; i < rows.size(); i++) {
+            out.println("<tr valign=Top>");
+            Vector row = (Vector) rows.elementAt(i);
+            //   for (int j = 0; j < row.size(); j++) {
+
+
+            out.println("<td valign=Top>" + usr.getTeamName(row.elementAt(0).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + usr.getTeamName(row.elementAt(1).toString()) + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(2).toString() + "<br></td>");
+            out.println("<td valign=Top>" + row.elementAt(3).toString() + "<br></td>");
+
+
+            out.println("</tr>");
+        }
+        out.println("</table>");
+        out.println("</tbody>");
+        out.println("</BODY></HTML>");
+        out.close();
+    }
+</source>
+</clone>
+
+<clone nlines="24" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveStats/displayFinalScoreServ.java" startline="37" endline="67" pcid="120">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        String sgame_id = request.getParameter("game_id");
+
+        if (sgame_id.equals("")) {
+            ;//out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+
+            try {
+                String homeTeam = usr.getTeamName(usr.getHomeTeam(game_id));
+                String awayTeam = usr.getTeamName(usr.getAwayTeam(game_id));
+                int homeScore = usr.numHomeGoals(game_id);
+                int awayScore = usr.numAwayGoals(game_id);
+                display(homeTeam, awayTeam, homeScore, awayScore, response);
+            } catch (SQLException e) {
+                out.println("No users found!!");
+                //displayACK("ERROR", "No users found!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("No users found!!!!!");
+                //displayACK("ERROR", "No users found!");
+            } finally {
+                out.close();
+            }
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/displayGameStatusServ.java" startline="35" endline="62" pcid="138">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        String sgame_id = request.getParameter("game_id");
+
+        if (sgame_id.equals("")) {
+            ;//out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+
+            try {
+                String gameStatus = usr.getGameStatus(game_id);
+                display(gameStatus, response);
+            } catch (SQLException e) {
+                out.println("No users found!!");
+                //displayACK("ERROR", "No users found!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("No users found!!!!!");
+                //displayACK("ERROR", "No users found!");
+            } finally {
+                out.close();
+            }
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="24" similarity="79">
+<source file="./cmpt371group02/src/java/addRemoveStats/displayFinalScoreServ.java" startline="37" endline="67" pcid="120">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        String sgame_id = request.getParameter("game_id");
+
+        if (sgame_id.equals("")) {
+            ;//out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+
+            try {
+                String homeTeam = usr.getTeamName(usr.getHomeTeam(game_id));
+                String awayTeam = usr.getTeamName(usr.getAwayTeam(game_id));
+                int homeScore = usr.numHomeGoals(game_id);
+                int awayScore = usr.numAwayGoals(game_id);
+                display(homeTeam, awayTeam, homeScore, awayScore, response);
+            } catch (SQLException e) {
+                out.println("No users found!!");
+                //displayACK("ERROR", "No users found!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("No users found!!!!!");
+                //displayACK("ERROR", "No users found!");
+            } finally {
+                out.close();
+            }
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/submitFinalResultServ.java" startline="31" endline="57" pcid="98">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        String sgame_id = request.getParameter("game_id");
+
+        if (sgame_id.equals("")) {
+            ;//out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+
+            try {
+                usr.setGamePlayed(game_id);
+            } catch (SQLException e) {
+                out.println("No users found!!");
+                //displayACK("ERROR", "No users found!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("No users found!!!!!");
+                //displayACK("ERROR", "No users found!");
+            } finally {
+                out.close();
+            }
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="23" similarity="73">
+<source file="./cmpt371group02/src/java/addRemoveUser/displayUserServ.java" startline="36" endline="62" pcid="203">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveUser();
+
+        try {
+            Vector rs = usr.getUsers();
+            String title = "Display User List";
+            Vector tblHeader = new Vector();
+            tblHeader.addElement("User ID");
+            tblHeader.addElement("First Name");
+            tblHeader.addElement("Last Name");
+            tblHeader.addElement("Username");
+            tblHeader.addElement("Password");
+            tblHeader.addElement("Access");
+            display(rs, tblHeader, title, response);
+        } catch (SQLException e) {
+            out.println("No users found");
+            //displayACK("ERROR", "No users found!");
+        } catch (Exception e) {
+            out.println("No users found");
+            //displayACK("ERROR", "No users found!");
+        } finally {
+            out.close();
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/displayRosterUserServ.java" startline="37" endline="62" pcid="13">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new editRoster();
+
+
+        try {
+            Vector rs = usr.getUsers();
+            String title = "Display User List";
+            Vector tblHeader = new Vector();
+            tblHeader.addElement("Player's ID");
+            tblHeader.addElement("Last Name");
+            tblHeader.addElement("First Name");
+            tblHeader.addElement("Current Team");
+            display(rs, tblHeader, title, response);
+        } catch (SQLException e) {
+            out.println("No users found");
+            //displayACK("ERROR", "No users found!");
+        } catch (Exception e) {
+            out.println("No users found");
+            //displayACK("ERROR", "No users found!");
+        } finally {
+            out.close();
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="23" similarity="78">
+<source file="./cmpt371group02/src/java/playerManagerProfile/getUpcomingGamesServ.java" startline="28" endline="60" pcid="38">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new playerManagerProfile();
+        Integer user_id = Integer.parseInt(request.getParameter("user_id"));
+
+        //Boolean false -> display 3 games
+        //Boolean true -> display all games
+        boolean num_games = Boolean.parseBoolean(request.getParameter("num_games"));
+
+        //Gets the upcoming games based on the user_id
+        try {
+
+            Vector rs = usr.getUpcomingGames(user_id, num_games);
+            String title = "Upcoming Games";
+            Vector tblHeader = new Vector();
+            tblHeader.addElement("Home Team");
+            tblHeader.addElement("Away Team");
+            tblHeader.addElement("Location");
+            tblHeader.addElement("Date");
+            display(rs, tblHeader, title, response);
+        } catch (SQLException e) {
+            out.println("No games found");
+            //displayACK("ERROR", "No users found!");
+        } catch (Exception e) {
+            out.println("No games found");
+            //displayACK("ERROR", "No users found!");
+        } finally {
+            out.close();
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/displayScheduleServ.java" startline="33" endline="61" pcid="89">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new editSchedule();
+
+        try {
+            Vector rs = usr.getGames();
+            String title = "Display Schedule";
+            Vector tblHeader = new Vector();
+            tblHeader.addElement("GameID");
+            tblHeader.addElement("Home Team");
+            tblHeader.addElement("Away Team");
+            tblHeader.addElement("Location");
+            tblHeader.addElement("Date");
+            //        tblHeader.addElement("Home Score");
+            //       tblHeader.addElement("Away Score");
+            //      tblHeader.addElement("Status");
+            display(rs, tblHeader, title, response);
+        } catch (SQLException e) {
+            out.println("No games found");
+            //displayACK("ERROR", "No users found!");
+        } catch (Exception e) {
+            out.println("No games found");
+            //displayACK("ERROR", "No users found!");
+        } finally {
+            out.close();
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="21" similarity="90">
+<source file="./cmpt371group02/src/java/addRemoveStats/displayGameStatusServ.java" startline="35" endline="62" pcid="138">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        String sgame_id = request.getParameter("game_id");
+
+        if (sgame_id.equals("")) {
+            ;//out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+
+            try {
+                String gameStatus = usr.getGameStatus(game_id);
+                display(gameStatus, response);
+            } catch (SQLException e) {
+                out.println("No users found!!");
+                //displayACK("ERROR", "No users found!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("No users found!!!!!");
+                //displayACK("ERROR", "No users found!");
+            } finally {
+                out.close();
+            }
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/submitFinalResultServ.java" startline="31" endline="57" pcid="98">
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html");
+        out = response.getWriter();
+        usr = new addRemoveStats();
+
+        String sgame_id = request.getParameter("game_id");
+
+        if (sgame_id.equals("")) {
+            ;//out.println("<div style=\"color:red;\">Please select a game</div>");
+        } else {
+            Integer game_id = Integer.parseInt(sgame_id);
+
+            try {
+                usr.setGamePlayed(game_id);
+            } catch (SQLException e) {
+                out.println("No users found!!");
+                //displayACK("ERROR", "No users found!");
+            } catch (Exception e) {
+                System.out.println(e);
+                out.println("No users found!!!!!");
+                //displayACK("ERROR", "No users found!");
+            } finally {
+                out.close();
+            }
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="15" similarity="80">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="196" endline="210" pcid="112">
+    public boolean removeGoal(int game_id, int score_id, String game_type) throws SQLException {
+        if (statExists(game_id, score_id)) {
+            String sql = "DELETE FROM game_stats WHERE game_id=" + game_id + " AND goal=" + score_id + " AND assist IS NULL" + " LIMIT 1";
+            st.executeUpdate(sql);
+            if (game_type.equals("home")) {
+                sql = "UPDATE games SET home_score=home_score-1 WHERE game_id=" + game_id;
+            } else if (game_type.equals("away")) {
+                sql = "UPDATE games SET away_score=away_score-1 WHERE game_id=" + game_id;
+            }
+            st.executeUpdate(sql);
+            return true;
+        } else {
+            return false;
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="171" endline="185" pcid="111">
+    public boolean removeGoal(int game_id, int score_id, int assist_id, String game_type) throws SQLException {
+        if (statExists(game_id, score_id, assist_id)) {
+            String sql = "DELETE FROM game_stats WHERE game_id=" + game_id + " AND goal=" + score_id + " AND assist=" + assist_id + " LIMIT 1";
+            st.executeUpdate(sql);
+            if (game_type.equals("home")) {
+                sql = "UPDATE games SET home_score=home_score-1 WHERE game_id=" + game_id;
+            } else if (game_type.equals("away")) {
+                sql = "UPDATE games SET away_score=away_score-1 WHERE game_id=" + game_id;
+            }
+            st.executeUpdate(sql);
+            return true;
+        } else {
+            return false;
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="12" similarity="75">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="127" endline="138" pcid="109">
+    public boolean addGoal(int game_id, int score_id, int assist_id, String game_type) throws SQLException {
+        String sql = "INSERT INTO game_stats VALUE(" + game_id + "," + score_id + "," + assist_id + ")";
+        st.executeUpdate(sql);
+        if (game_type.equals("home")) {
+            sql = "UPDATE games SET home_score=home_score+1 WHERE game_id=" + game_id;
+        } else if (game_type.equals("away")) {
+            sql = "UPDATE games SET away_score=away_score+1 WHERE game_id=" + game_id;
+        }
+        st.executeUpdate(sql);
+        System.out.println("here");
+        return true;
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="149" endline="159" pcid="110">
+    public boolean addGoal(int game_id, int score_id, String game_type) throws SQLException {
+        String sql = "INSERT INTO game_stats (game_id, goal) VALUE(" + game_id + "," + score_id + ")";
+        st.executeUpdate(sql);
+        if (game_type.equals("home")) {
+            sql = "UPDATE games SET home_score=home_score+1 WHERE game_id=" + game_id;
+        } else if (game_type.equals("away")) {
+            sql = "UPDATE games SET away_score=away_score+1 WHERE game_id=" + game_id;
+        }
+        st.executeUpdate(sql);
+        return true;
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="72">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="49" endline="61" pcid="46">
+    public Vector getAnnouncements(Integer team_id) throws SQLException, Exception {
+        Integer manager_id = getManager(team_id);
+        String sql = "SELECT poster, message FROM announcements where (poster = " + manager_id + ") OR (access = 2)";
+        ResultSet result = st.executeQuery(sql);
+
+        if (result.next()) {
+            System.out.println(dbf.getRecord(sql));
+            return dbf.getRecord(sql);
+        } else {
+            throw new Exception("No announcements found!");
+        }
+
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="35" endline="45" pcid="45">
+    public Vector getAnnouncements() throws SQLException, Exception {
+        String sql = "SELECT poster, message FROM announcements where (access = 2)";
+        ResultSet result = st.executeQuery(sql);
+
+        if (result.next()) {
+            System.out.println(dbf.getRecord(sql));
+            return dbf.getRecord(sql);
+        } else {
+            throw new Exception("No announcements found!");
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198">
+    public addRemoveUser() {
+        String table1 = "users";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152">
+    public addRemoveTeam() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198">
+    public addRemoveUser() {
+        String table1 = "users";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102">
+    public addRemoveStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198">
+    public addRemoveUser() {
+        String table1 = "users";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43">
+    public playerManagerProfile() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="72">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198">
+    public addRemoveUser() {
+        String table1 = "users";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212">
+    public editStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198">
+    public addRemoveUser() {
+        String table1 = "users";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27">
+    public editRoster() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveUser/addRemoveUser.java" startline="22" endline="33" pcid="198">
+    public addRemoveUser() {
+        String table1 = "users";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75">
+    public editSchedule() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="90">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152">
+    public addRemoveTeam() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102">
+    public addRemoveStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152">
+    public addRemoveTeam() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43">
+    public playerManagerProfile() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152">
+    public addRemoveTeam() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212">
+    public editStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152">
+    public addRemoveTeam() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27">
+    public editRoster() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveTeam/addRemoveTeam.java" startline="21" endline="32" pcid="152">
+    public addRemoveTeam() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75">
+    public editSchedule() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102">
+    public addRemoveStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43">
+    public playerManagerProfile() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102">
+    public addRemoveStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212">
+    public editStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102">
+    public addRemoveStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27">
+    public editRoster() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="11" similarity="81">
+<source file="./cmpt371group02/src/java/addRemoveStats/addRemoveStats.java" startline="25" endline="36" pcid="102">
+    public addRemoveStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75">
+    public editSchedule() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="10" similarity="80">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43">
+    public playerManagerProfile() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212">
+    public editStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="10" similarity="90">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43">
+    public playerManagerProfile() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27">
+    public editRoster() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="10" similarity="90">
+<source file="./cmpt371group02/src/java/playerManagerProfile/playerManagerProfile.java" startline="18" endline="28" pcid="43">
+    public playerManagerProfile() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75">
+    public editSchedule() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="10" similarity="80">
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212">
+    public editStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27">
+    public editRoster() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="10" similarity="80">
+<source file="./cmpt371group02/src/java/editStats/editStats.java" startline="23" endline="33" pcid="212">
+    public editStats() {
+        String table1 = "teams";
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75">
+    public editSchedule() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+<clone nlines="10" similarity="90">
+<source file="./cmpt371group02/src/java/editRoster/editRoster.java" startline="25" endline="35" pcid="27">
+    public editRoster() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+<source file="./cmpt371group02/src/java/editSchedule/editSchedule.java" startline="21" endline="31" pcid="75">
+    public editSchedule() {
+
+        try {
+            db = ConnectionManager.getConnection();
+            st = db.createStatement();
+            dbf = new dbFunctions();
+        } catch (SQLException ex) {
+            System.out.println("DB open exception\n");
+            System.exit(1);
+        }
+    }
+</source>
+</clone>
+
+</clones>
