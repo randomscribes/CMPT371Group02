@@ -10,13 +10,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
+import org.junit.runner.RunWith;
+import org.jmock.Mockery;
+import org.jmock.integration.junit4.JMock;
+import org.jmock.integration.junit4.JUnit4Mockery;
+import org.jmock.Expectations;
 /**
  * Test class for testing editRoster.java
  * @author paw818
  */
+
 public class editRosterTest {
-    
+
     editRoster instance;
     
     //these values should be checked with the database before testing
